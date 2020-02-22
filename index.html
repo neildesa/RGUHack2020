@@ -46,10 +46,13 @@
     setTimeout(fadeinchoice, 11000)
     function fadeinchoice() {
       $("#div3").fadeIn(3000);
+      $("#levelA").fadeIn(0);
     };
 
     function spawnLevelB(a, firstChord){
       arrayOfChords.push('firstChord');
+      $("#ins1").fadeOut(0);
+      $("#levelS").fadeIn(2000);
       if(a===1)
       {
         $("#buttonA2").fadeOut(0);
@@ -63,6 +66,7 @@
     }
     function playSongBasedOnChords(b, secondChord){
       arrayOfChords.push('secondChord');
+      
       var y = 0;
       while(y<5)
       {
@@ -75,7 +79,9 @@
           y++;
         }
       }
-      
+      $("#div3").fadeOut(0);
+      $("#div4").fadeIn(3000);
+     document.getElementById("demo2").innerHTML = arrayOfChords;
     }
     var toBeRemoved=0;
     var keys = [];
@@ -101,7 +107,10 @@
      }
      var allKeys = keys.toString();
      document.getElementById("demo").innerHTML = keys;
-     amount--;
+     if(keys.length===3)
+     {
+      $("#div4").fadeOut(0);
+     }
     }
   </script>
   <style>
@@ -123,6 +132,13 @@
 
     .buttonApp{
     font-size: 30px;
+    }
+
+    .specialh2{
+      line-height: 2.5rem;
+      background: -webkit-linear-gradient(rgba(255, 255, 255), rgba(255, 255, 255, 0));
+      -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
+      -webkit-background-clip: text;
     }
     </style>
 
@@ -157,37 +173,74 @@
   <!-- Header -->
   <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
-      <div class="mx-auto text-center">        
+      <div class="mx-auto text-center">
+        <br>
+        <br>
+                
         <div id="div1" style="display:none;"><h1 class="mx-auto my-0 ">Hello ;)</h1></div><br>
         <div id="div2" style="display:none;"><h1 class="mx-auto my-0 ">Welcome to Sound Adventure</h1></div><br>
-        <div id="div3" style="display:none;"><h1 class="mx-auto my-0 ">Select your first chord:</h1>
+        <div id="div3" style="display:none;">
         
-        
+          <div class="buttonApp">
+            <div id="levelA" style="display:none;">
+              <div id="ins1"> <h1 class="mx-auto my-0 ">Select your first chord:</h1> </div>
+              <button id="buttonA1" class="bubble" onClick="spawnLevelB(1,'chord1')"> A1 </button>
+              <button id="buttonA2" class="bubble" onClick="spawnLevelB(2,'chord1')"> A2 </button>
+            </div>
+            
+            <div id="levelS" style="display:none;"> <h1 class="mx-auto my-0 ">Select your second chord:</h1>
+            </div>
+              <div id="levelB1" style="display:none;">
+                
+                <button id="buttonB1" class="bubble" onClick="playSongBasedOnChords(1,'chord2')"> B1 </button>
+                <button id="buttonB2" class="bubble" onClick="playSongBasedOnChords(2,'chord2')"> B2 </button>
+              </div>
+              <div id="levelB2" style="display:none;">
+                <button id="buttonB3" class="bubble" onClick="playSongBasedOnChords(3,'chord2')"> B3 </button>
+                <button id="buttonB4" class="bubble" onClick="playSongBasedOnChords(4,'chord2')"> B4 </button>
+              </div>
+  
+          </div>
         
         </div>
         
         <br>
 
-        <div class="buttonApp">
-
-          <button id="buttonA1" class="bubble" onClick="spawnLevelB(1,'chord1')"> A1 </button>
-          <button id="buttonA2" class="bubble" onClick="spawnLevelB(2,'chord1')"> A2 </button>
-
-          
-          <div id="levelB1" style="display:none;">
-            <button id="buttonB1" class="bubble" onClick="playSongBasedOnChords(1,'chord2')"> B1 </button>
-            <button id="buttonB2" class="bubble" onClick="playSongBasedOnChords(2,'chord2')"> B2 </button>
-          </div>
-          <div id="levelB2" style="display:none;">
-            <button id="buttonB3" class="bubble" onClick="playSongBasedOnChords(3,'chord2')"> B3 </button>
-            <button id="buttonB4" class="bubble" onClick="playSongBasedOnChords(4,'chord2')"> B4 </button>
-          </div>
-
-        </div>
-        <p id="demo"></p>
+        
+        
         <br><br><br>
             <!--Piano Code-->
-      <div>
+      <div id="div4" style="display: none;">
+        <h2 class="specialh2"> Use the following piano to hear the different available keys:</h2>
+        <ul id="piano">
+          <li data-note="C4" class="key">
+            <div data-note="C#4" class="black-key">C#4</div>
+            C4
+          </li>
+          <li data-note="D4" class="key">
+            <div data-note="D#4" class="black-key">D#4</div>
+            D4
+          </li>
+          <li data-note="E4" class="key">
+            E4
+          </li>
+          <li data-note="F4" class="key">
+            <div data-note="F#4" class="black-key">F#4</div>
+            F4
+          </li>
+          <li data-note="G4" class="key">
+            <div data-note="G#4" class="black-key">G#4</div>
+            G4
+          </li>
+          <li data-note="A4" class="key">
+            <div data-note="A#4" class="black-key">A#4</div>
+            A4
+          </li>
+          <li data-note="B4" class="key">
+            B4
+          </li>
+        </ul>
+        <br>
         <ul id="piano">
           <li onClick="keyPressed('C4')" data-note="C4" class="key">
             <div onClick="keyPressed('C#4')" data-note="C#4" class="black-key">C#4</div>
@@ -219,6 +272,12 @@
         <script src="js/piano.js"></script>
       </div>
         <!--End of Piano Code-->
+
+        <p id="demo2"></p>
+        <p id="demo"></p>
+
+
+
       </div>
     </div>
   </header>

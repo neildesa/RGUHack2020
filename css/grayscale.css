@@ -110,6 +110,8 @@
 .masthead h2 {
   max-width: 20rem;
   font-size: 1rem;
+  background: -webkit-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  -webkit-text-fill-color: transparent;
 }
 
 @media (min-width: 768px) {
@@ -132,6 +134,8 @@
   .masthead h2 {
     max-width: 30rem;
     font-size: 1.25rem;
+    background: -webkit-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  -webkit-text-fill-color: transparent;
   }
 }
 
