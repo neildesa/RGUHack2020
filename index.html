@@ -44,14 +44,81 @@
       $("#div3").fadeIn(3000);
     };
 
-    function spawnLevelB(){
-      $("#levelB").fadeIn(3000);
+    function spawnLevelB(a){
+      if(a===1)
+      {
+        $("#buttonA2").fadeOut(0);
+        $("#levelB1").fadeIn(3000);
+      }
+      if(a===2)
+      {
+        $("#buttonA1").fadeOut(0);
+        $("#levelB2").fadeIn(3000);
+      }
     }
-    function spawnLevelC(){
-      $("#levelC").fadeIn(3000);
+    function spawnLevelC(b){
+      if(b===1)
+      {
+        $("#buttonB2").fadeOut(0);
+        $("#levelC1").fadeIn(3000);
+      }
+      if(b===2)
+      {
+        $("#buttonB1").fadeOut(0);
+        $("#levelC2").fadeIn(3000);
+      }
+      if(b===3)
+      {
+        $("#buttonB4").fadeOut(0);
+        $("#levelC3").fadeIn(3000);
+      }
+      if(b===4)
+      {
+        $("#buttonB3").fadeOut(0);
+        $("#levelC4").fadeIn(3000);
+      }
     }
-    function spawnLevelD(){
-      $("#levelD").fadeIn(3000);
+    function spawnLevelD(c){
+      if(c===1)
+      {
+        $("#buttonC2").fadeOut(0);
+        $("#levelD1").fadeIn(3000);
+      }
+      if(c===2)
+      {
+        $("#buttonC1").fadeOut(0);
+        $("#levelD2").fadeIn(3000);
+      }
+      if(c===3)
+      {
+        $("#buttonC4").fadeOut(0);
+        $("#levelD3").fadeIn(3000);
+      }
+      if(c===4)
+      {
+        $("#buttonC3").fadeOut(0);
+        $("#levelD4").fadeIn(3000);
+      }
+      if(c===5)
+      {
+        $("#buttonC6").fadeOut(0);
+        $("#levelD5").fadeIn(3000);
+      }
+      if(c===6)
+      {
+        $("#buttonC5").fadeOut(0);
+        $("#levelD6").fadeIn(3000);
+      }
+      if(c===7)
+      {
+        $("#buttonC8").fadeOut(0);
+        $("#levelD7").fadeIn(3000);
+      }
+      if(c===8)
+      {
+        $("#buttonC7").fadeOut(0);
+        $("#levelD8").fadeIn(3000);
+      }
     }
   </script>
   <style>
@@ -110,31 +177,45 @@
         
         
         
-        </div><br>
-
-        <button class="bubble" onClick="spawnLevelB()"> A1 </button>
-        <button class="bubble" onClick="spawnLevelB()"> A2 </button>
-        <br>
-        
-        <div id="levelB" style="display:none;">
-          <button class="bubble" onClick="spawnLevelC()"> B1 </button>
-          <button class="bubble" onClick="spawnLevelC()"> B2 </button>
-          <button class="bubble" onClick="spawnLevelC()"> B3 </button>
-          <button class="bubble" onClick="spawnLevelC()"> B4 </button>
         </div>
         
         <br>
 
-        <div id="levelC" style="display:none;">
-          <button class="bubble" onClick="spawnLevelC()"> B1 </button>
-          <button class="bubble" onClick="spawnLevelC()"> B2 </button>
-          <button class="bubble" onClick="spawnLevelC()"> B3 </button>
-          <button class="bubble" onClick="spawnLevelC()"> B4 </button>
-          <button class="bubble" onClick="spawnLevelC()"> B1 </button>
-          <button class="bubble" onClick="spawnLevelC()"> B2 </button>
-          <button class="bubble" onClick="spawnLevelC()"> B3 </button>
-          <button class="bubble" onClick="spawnLevelC()"> B4 </button>
-        </div><br>
+        
+        <button id="buttonA1" class="bubble" onClick="spawnLevelB(1)"> A1 </button>
+        <button id="buttonA2" class="bubble" onClick="spawnLevelB(2)"> A2 </button>
+
+        <br>
+        
+        <div id="levelB1" style="display:none;">
+          <button id="buttonB1" class="bubble" onClick="spawnLevelC(1)"> B1 </button>
+          <button id="buttonB2" class="bubble" onClick="spawnLevelC(2)"> B2 </button>
+        </div>
+        <div id="levelB2" style="display:none;">
+          <button id="buttonB3" class="bubble" onClick="spawnLevelC(3)"> B3 </button>
+          <button id="buttonB4" class="bubble" onClick="spawnLevelC(4)"> B4 </button>
+        </div>
+        
+        <br>
+
+        <div id="levelC1" style="display:none;">
+          <button class="bubble" onClick="spawnLevelC()"> C1 </button>
+          <button class="bubble" onClick="spawnLevelC()"> C2 </button>
+        </div>
+        <div id="levelC2" style="display:none;">
+          <button class="bubble" onClick="spawnLevelC()"> C3 </button>
+          <button class="bubble" onClick="spawnLevelC()"> C4 </button>
+        </div>
+        <div id="levelC3" style="display:none;">
+          <button class="bubble" onClick="spawnLevelC()"> C5 </button>
+          <button class="bubble" onClick="spawnLevelC()"> C6 </button>
+        </div>
+        <div id="levelC4" style="display:none;">
+          <button class="bubble" onClick="spawnLevelC()"> C7 </button>
+          <button class="bubble" onClick="spawnLevelC()"> C8 </button>
+        </div>
+        
+        <br>
       </div>
     </div>
   </header>
