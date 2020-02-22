@@ -23,27 +23,54 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script>
-    setTimeout(fadeinhello, 0)
+    //setTimeout(fadeinhello, 0)
     function fadeinhello() {
       $("#div1").fadeIn(3000);
     };
     setTimeout(fadeouthello, 1000)
     function fadeouthello() {
-      $("#div1").fadeOut(1000);
+      $("#div1").fadeOut(2000);
     };
-    setTimeout(fadeinwelcome, 5000)
+    setTimeout(fadeinwelcome, 6000)
     function fadeinwelcome() {
       $("#div2").fadeIn(3000);
     };
-    setTimeout(fadeoutwelcome, 8000)
+    setTimeout(fadeoutwelcome, 9000)
     function fadeoutwelcome() {
       $("#div2").fadeOut(2000);
     };
-    setTimeout(fadeinchoice, 10000)
+    setTimeout(fadeinchoice, 11000)
     function fadeinchoice() {
       $("#div3").fadeIn(3000);
     };
+
+    function spawnLevelB(){
+      $("#levelB").fadeIn(3000);
+    }
+    function spawnLevelC(){
+      $("#levelC").fadeIn(3000);
+    }
+    function spawnLevelD(){
+      $("#levelD").fadeIn(3000);
+    }
   </script>
+  <style>
+    .bubble{
+    height: 150px;
+    width: 150px;
+    background-image: url(bubble.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    border-radius: 50%;
+    }
+    .bubble:focus {outline:0;}
+    </style>
 
 </head>
 
@@ -79,8 +106,35 @@
       <div class="mx-auto text-center">        
         <div id="div1" style="display:none;"><h1 class="mx-auto my-0 ">Hello ;)</h1></div><br>
         <div id="div2" style="display:none;"><h1 class="mx-auto my-0 ">Welcome to Sound Adventure</h1></div><br>
-        <div id="div3" style="display:none;"><h1 class="mx-auto my-0 ">Select your first chord:</h1></div><br>
+        <div id="div3" style="display:none;"><h1 class="mx-auto my-0 ">Select your first chord:</h1>
+        
+        
+        
+        </div><br>
 
+        <button class="bubble" onClick="spawnLevelB()"> A1 </button>
+        <button class="bubble" onClick="spawnLevelB()"> A2 </button>
+        <br>
+        
+        <div id="levelB" style="display:none;">
+          <button class="bubble" onClick="spawnLevelC()"> B1 </button>
+          <button class="bubble" onClick="spawnLevelC()"> B2 </button>
+          <button class="bubble" onClick="spawnLevelC()"> B3 </button>
+          <button class="bubble" onClick="spawnLevelC()"> B4 </button>
+        </div>
+        
+        <br>
+
+        <div id="levelC" style="display:none;">
+          <button class="bubble" onClick="spawnLevelC()"> B1 </button>
+          <button class="bubble" onClick="spawnLevelC()"> B2 </button>
+          <button class="bubble" onClick="spawnLevelC()"> B3 </button>
+          <button class="bubble" onClick="spawnLevelC()"> B4 </button>
+          <button class="bubble" onClick="spawnLevelC()"> B1 </button>
+          <button class="bubble" onClick="spawnLevelC()"> B2 </button>
+          <button class="bubble" onClick="spawnLevelC()"> B3 </button>
+          <button class="bubble" onClick="spawnLevelC()"> B4 </button>
+        </div><br>
       </div>
     </div>
   </header>
