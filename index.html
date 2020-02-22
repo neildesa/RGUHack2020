@@ -20,11 +20,14 @@
 
   <!-- Custom styles for this template -->
   <link href="css/grayscale.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/tone"></script>
+  <link href="css/piano.css" rel="stylesheet">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script>
     
     var arrayOfChords = [];
+    setTimeout(fadeinhello, 500)
     function fadeinhello() {
       $("#div1").fadeIn(3000);
     };
@@ -45,8 +48,8 @@
       $("#div3").fadeIn(3000);
     };
 
-    function spawnLevelB(a){
-      arrayOfChords.push(a);
+    function spawnLevelB(a, firstChord){
+      arrayOfChords.push('firstChord');
       if(a===1)
       {
         $("#buttonA2").fadeOut(0);
@@ -58,88 +61,47 @@
         $("#levelB2").fadeIn(3000);
       }
     }
-    function spawnLevelC(b){
-      arrayOfChords.push(b);
-      if(b===1)
-      {
-        $("#buttonB2").fadeOut(0);
-        $("#levelC1").fadeIn(3000);
-      }
-      if(b===2)
-      {
-        $("#buttonB1").fadeOut(0);
-        $("#levelC2").fadeIn(3000);
-      }
-      if(b===3)
-      {
-        $("#buttonB4").fadeOut(0);
-        $("#levelC3").fadeIn(3000);
-      }
-      if(b===4)
-      {
-        $("#buttonB3").fadeOut(0);
-        $("#levelC4").fadeIn(3000);
-      }
-    }
-    function spawnLevelD(c){
-      arrayOfChords.push(c);
-      if(c===1)
-      {
-        $("#buttonC2").fadeOut(0);
-        $("#levelD1").fadeIn(3000);
-      }
-      if(c===2)
-      {
-        $("#buttonC1").fadeOut(0);
-        $("#levelD2").fadeIn(3000);
-      }
-      if(c===3)
-      {
-        $("#buttonC4").fadeOut(0);
-        $("#levelD3").fadeIn(3000);
-      }
-      if(c===4)
-      {
-        $("#buttonC3").fadeOut(0);
-        $("#levelD4").fadeIn(3000);
-      }
-      if(c===5)
-      {
-        $("#buttonC6").fadeOut(0);
-        $("#levelD5").fadeIn(3000);
-      }
-      if(c===6)
-      {
-        $("#buttonC5").fadeOut(0);
-        $("#levelD6").fadeIn(3000);
-      }
-      if(c===7)
-      {
-        $("#buttonC8").fadeOut(0);
-        $("#levelD7").fadeIn(3000);
-      }
-      if(c===8)
-      {
-        $("#buttonC7").fadeOut(0);
-        $("#levelD8").fadeIn(3000);
-      }
-    }
-
-    function playSong(d){
-      arrayOfChords.push(d);
+    function playSongBasedOnChords(b, secondChord){
+      arrayOfChords.push('secondChord');
       var y = 0;
-      while(y<18)
+      while(y<5)
       {
-        if(y==d)
+        if(y==b)
         {
-          $("#buttonD"+d).fadeIn(0);
           y++;
         }
         else{
-          $("#buttonD"+y).fadeOut(0);
+          $("#buttonB"+y).fadeOut(0);
           y++;
         }
       }
+      
+    }
+    var toBeRemoved=0;
+    var keys = [];
+    function keyPressed(key){
+      
+   
+     if(keys.length<3)
+     {
+       if(toBeRemoved===1)
+       {
+        secondToLast = keys.length;
+        keys.splice(secondToLast, 1);
+        toBeRemoved=0;
+       }
+       else if(key==="C#4" || key==="D#4" || key==="F#4" || key==="G#4" || key==="A#4")
+       {
+          keys.push(key);
+          toBeRemoved=1;
+        }
+        else{
+          keys.push(key);
+        }
+     }
+     var allKeys = keys.toString();
+     document.getElementById("demo").innerHTML = keys;
+     amount--;
     }
   </script>
   <style>
@@ -208,78 +170,60 @@
 
         <div class="buttonApp">
 
-          <button id="buttonA1" class="bubble" onClick="spawnLevelB(1)"> A1 </button>
-          <button id="buttonA2" class="bubble" onClick="spawnLevelB(2)"> A2 </button>
+          <button id="buttonA1" class="bubble" onClick="spawnLevelB(1,'chord1')"> A1 </button>
+          <button id="buttonA2" class="bubble" onClick="spawnLevelB(2,'chord1')"> A2 </button>
 
           
           <div id="levelB1" style="display:none;">
-            <button id="buttonB1" class="bubble" onClick="spawnLevelC(1)"> B1 </button>
-            <button id="buttonB2" class="bubble" onClick="spawnLevelC(2)"> B2 </button>
+            <button id="buttonB1" class="bubble" onClick="playSongBasedOnChords(1,'chord2')"> B1 </button>
+            <button id="buttonB2" class="bubble" onClick="playSongBasedOnChords(2,'chord2')"> B2 </button>
           </div>
           <div id="levelB2" style="display:none;">
-            <button id="buttonB3" class="bubble" onClick="spawnLevelC(3)"> B3 </button>
-            <button id="buttonB4" class="bubble" onClick="spawnLevelC(4)"> B4 </button>
-          </div>
-          
-
-          <div id="levelC1" style="display:none;">
-            <button id="buttonC1" class="bubble" onClick="spawnLevelD(1)"> C1 </button>
-            <button id="buttonC2" class="bubble" onClick="spawnLevelD(2)"> C2 </button>
-          </div>
-          <div id="levelC2" style="display:none;">
-            <button id="buttonC3" class="bubble" onClick="spawnLevelD(3)"> C3 </button>
-            <button id="buttonC4" class="bubble" onClick="spawnLevelD(4)"> C4 </button>
-          </div>
-          <div id="levelC3" style="display:none;">
-            <button id="buttonC5" class="bubble" onClick="spawnLevelD(5)"> C5 </button>
-            <button id="buttonC6" class="bubble" onClick="spawnLevelD(6)"> C6 </button>
-          </div>
-          <div id="levelC4" style="display:none;">
-            <button id="buttonC7" class="bubble" onClick="spawnLevelD(7)"> C7 </button>
-            <button id="buttonC8" class="bubble" onClick="spawnLevelD(8)"> C8 </button>
-          </div>
-          
-
-          
-          <div id="levelD1" style="display:none;">
-            <button id="buttonD1" class="bubble" onClick="playSong(1)"> D1 </button>
-            <button id="buttonD2" class="bubble" onClick="playSong(2)"> D2 </button>
-          </div>
-          <div id="levelD2" style="display:none;">
-            <button id="buttonD3" class="bubble" onClick="playSong(3)"> D3 </button>
-            <button id="buttonD4" class="bubble" onClick="playSong(4)"> D4 </button>
-          </div>
-          <div id="levelD3" style="display:none;">
-            <button id="buttonD5" class="bubble" onClick="playSong(5)"> D5 </button>
-            <button id="buttonD6" class="bubble" onClick="playSong(6)"> D6 </button>
-          </div>
-          <div id="levelD4" style="display:none;">
-            <button id="buttonD7" class="bubble" onClick="playSong(7)"> D7 </button>
-            <button id="buttonD8" class="bubble" onClick="playSong(8)"> D8 </button>
-          </div>
-          <div id="levelD5" style="display:none;">
-            <button id="buttonD9" class="bubble" onClick="playSong(9)"> D9 </button>
-            <button id="buttonD10" class="bubble" onClick="playSong(10)"> D10 </button>
-          </div>
-          <div id="levelD6" style="display:none;">
-            <button id="buttonD11" class="bubble" onClick="playSong(11)"> D11 </button>
-            <button id="buttonD12" class="bubble" onClick="playSong(12)"> D12 </button>
-          </div>
-          <div id="levelD7" style="display:none;">
-            <button id="buttonD13" class="bubble" onClick="playSong(13)"> D13 </button>
-            <button id="buttonD14" class="bubble" onClick="playSong(14)"> D14 </button>
-          </div>
-          <div id="levelD8" style="display:none;">
-            <button id="buttonD15" class="bubble" onClick="playSong(15)"> D15 </button>
-            <button id="buttonD16" class="bubble" onClick="playSong(16)"> D16 </button>
+            <button id="buttonB3" class="bubble" onClick="playSongBasedOnChords(3,'chord2')"> B3 </button>
+            <button id="buttonB4" class="bubble" onClick="playSongBasedOnChords(4,'chord2')"> B4 </button>
           </div>
 
         </div>
-        
+        <p id="demo"></p>
+        <br><br><br>
+            <!--Piano Code-->
+      <div>
+        <ul id="piano">
+          <li onClick="keyPressed('C4')" data-note="C4" class="key">
+            <div onClick="keyPressed('C#4')" data-note="C#4" class="black-key">C#4</div>
+            C4
+          </li>
+          <li onClick="keyPressed('D4')" data-note="D4" class="key">
+            <div onClick="keyPressed('D#4')" data-note="D#4" class="black-key">D#4</div>
+            D4
+          </li>
+          <li onClick="keyPressed('E4')" data-note="E4" class="key">
+            E4
+          </li>
+          <li onClick="keyPressed('F4')" data-note="F4" class="key">
+            <div onClick="keyPressed('F#4')" data-note="F#4" class="black-key">F#4</div>
+            F4
+          </li>
+          <li onClick="keyPressed('G4')" data-note="G4" class="key">
+            <div onClick="keyPressed('G#4')" data-note="G#4" class="black-key">G#4</div>
+            G4
+          </li>
+          <li onClick="keyPressed('A4')" data-note="A4" class="key">
+            <div onClick="keyPressed('A#4')" data-note="A#4" class="black-key">A#4</div>
+            A4
+          </li>
+          <li onClick="keyPressed('B4')" data-note="B4" class="key">
+            B4
+          </li>
+        </ul>
+        <script src="js/piano.js"></script>
+      </div>
+        <!--End of Piano Code-->
       </div>
     </div>
   </header>
 
+  
 
 
   <!-- Footer -->
