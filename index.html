@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Grayscale - Start Bootstrap Theme</title>
+  <title>Sound Adventure</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -58,16 +58,22 @@
       if(a===1)
       {
         $("#buttonA2").fadeOut(0);
+        $("#dec1").fadeOut(0);
+        $("#dec2").fadeOut(0);
         $("#levelB1").fadeIn(3000);
+        $("#dec3").fadeIn(3000);
+        $("#dec4").fadeIn(3000);
       }
       if(a===2)
       {
+        $("#dec1").fadeOut(0);
+        $("#dec2").fadeOut(0);
         $("#buttonA1").fadeOut(0);
         $("#levelB2").fadeIn(3000);
+        $("#dec5").fadeIn(3000);
+        $("#dec6").fadeIn(3000);
       }
     }
-    var thirdChord;
-    var fourthChord;
 
     function playSongBasedOnChords(b, secondChord){
       arrayOfChords.push(secondChord);
@@ -104,7 +110,6 @@
       console.log(song);
       $("#div3").fadeOut(0);
       $("#div4").fadeIn(3000);
-     document.getElementById("demo2").innerHTML = arrayOfChords;
      displayKeys();
     }
                                            
@@ -146,23 +151,35 @@
         else{
           localArray.push(key);
         }
-     //localArray.push(key);
-     var allKeys = localArray.toString();
+     var allKeys = targetArray.toString();
      document.getElementById("demo").innerHTML = allKeys;
-     
+     pumpedText="Pumped Up Kicks is a 1-3-7-4 Progression (order of notes in key) in D Minor. It's a slightly unusual progression for its genre epscially with the Seventh chord (C Major) "
+          + "being augmented (Augmented means the chord has been slightly stretched larger, in this case making turning it from a minor chord to a major chord). This " 
+          + "helps with making it a progression that stands out while maintaining a catchiness by relying on a traditional cadence i.e. an ending (in this case a plagal " 
+          + "cadence; when the progression ends with the fourth chord to the first chord) ";
 
+     shrekText="All star (famously known from Shrek) is a 1-5-2-4 Progression in D Major. It's a more traditional four chord progression for its genre which supports " 
+     + "why it has a familiar pleasantness to its sound. This song ends with a traditional plagal cadence (the ending, in this case when the fourth chord finishes to the first chord) ";
+
+     megaloText="Megalovania is an internet famous tune made popular by the video game Undertale. It has a distinct and clear descending chord progression that is played "
+     + "rapidly to force the song into a sense of intensity. This part of the progression heard doesn't have a traditional cadence (from the sixth chord to the first chord) which helps "
+     + "prevent it from sounding like it will end and instead leads to the repetion of the progression.";
      if(localArray.includes(targetArray[0]) && localArray.includes(targetArray[1]) && localArray.includes(targetArray[2]) && localArray.includes(targetArray[3]))
      {
       $("#div4").fadeOut(0);
+      $("#div5").fadeIn(2000);
       //call your function here
       if (arrayOfChords[1] === "F3") {
         playPumpedUpKicksMelody();
+        document.getElementById("textBox").innerHTML = pumpedText;
       }
       else if (arrayOfChords[1] === "A3") {
         playShrekMelody();
+        document.getElementById("textBox").innerHTML = shrekText;
       }
       else if (arrayOfChords[1] === "G2") {
         playMegaloMelody();
+        document.getElementById("textBox").innerHTML = megaloText;
       }
       
      }
@@ -400,10 +417,26 @@
     font-size: 30px;
     }
 
+    .refresh{
+    height: 40px;
+    width: 40px;
+    background-image: url(refresh.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    border-radius: 50%;
+    }
+    .refresh:focus {outline:0;}
     .specialh2{
       line-height: 2rem;
       font-size: 1.6rem;;
       background: -webkit-linear-gradient(rgba(255, 255, 255), rgba(255, 255, 255, 0));
+      margin: 0 0 0 0;
       -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
       -webkit-background-clip: text;
     }
@@ -421,17 +454,17 @@
         Menu
         <i class="fas fa-bars"></i>
       </button>
-      <button id='button' type='button'>Reset Audio</button>
+      <button id='button' type='button' class="refresh"></button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about" onClick="addDrumsToCurrentSong()" >About</a>
+            <a class="nav-link js-scroll-trigger" href="#">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
+            <a class="nav-link js-scroll-trigger" href="#">Projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#signup">Contact</a>
+            <a class="nav-link js-scroll-trigger" href="#">Contact</a>
           </li>
         </ul>
       </div>
@@ -454,19 +487,24 @@
             <div id="levelA" style="display:none;">
               <div id="ins1"> <h1 class="mx-auto my-0 ">Select your first chord:</h1> </div>
               <br>
+              <h3 id="dec1"> See how one chord can be used for a major and a minor song. <h3>
               <button id="buttonA1" class="bubble" onClick="spawnLevelB(1,'D3')"> D3 </button>
+              <h3 id="dec2"> See how a simple chord can be made instense.</h3>
               <button id="buttonA2" class="bubble" onClick="spawnLevelB(2,'A2')"> A2 </button>
             </div>
             
             <div id="levelS" style="display:none;"> <h1 class="mx-auto my-0 ">Select your second chord:</h1>
             </div>
               <div id="levelB1" style="display:none;">
-                
+                <h3 id="dec3"> See an example of how a minor start can lead to an upbeat song.</h3>
                 <button id="buttonB1" class="bubble" onClick="playSongBasedOnChords(1,'F3')"> F3 </button>
+                <h3 id="dec4"> See an example of how a major progression sounds upbeat.</h3>
                 <button id="buttonB2" class="bubble" onClick="playSongBasedOnChords(2,'A3')"> A3 </button>
               </div>
               <div id="levelB2" style="display:none;">
+                <h3 id="dec5"> See how a descending progression sounds when made fast.</h3>
                 <button id="buttonB3" class="bubble" onClick="playSongBasedOnChords(3,'G2')"> G2 </button>
+                <h3 id="dec6"> See how a minor start can create a sad progression.</h3>
                 <button id="buttonB4" class="bubble" onClick="playSongBasedOnChords(4,'chord2')"> B4 </button>
               </div>
   
@@ -481,11 +519,11 @@
         <br><br><br>
             <!--Piano Code-->
       <div id="div4" style="display: none;">
-        <h2 class="specialh2"> Use the following piano to hear the different available keys:</h2>
         
+        <h2 class="specialh2"> Does the chord progression sound familiar? Try playing the blue melody notes to recognise the tune of the song.</h2>
         <br>
-        <h2 class="specialh2"> Use the following piano to choose three keys, once you have chosen them you cannot go:</h2>
-        <ul id="piano">
+        <br>
+        <ul id="piano" style="padding-left: 30%;">
           <li id="C4" onClick="keyPressed('C4')" data-note="C4" class="key">
             <div id="C#4" onClick="keyPressed('C#4')" data-note="C#4" class="black-key">C#4</div>
             C4
@@ -542,15 +580,35 @@
         </script>
       </div>
         <!--End of Piano Code-->
-       
         
-        <p id="demo2"></p>
-        <p id="demo"></p>
-       
 
 
       </div>
       <img id="img2" src="tree.gif" width=20%/>
+      <div id="div5" style="display: none; text-align: center;">
+        <h2 class="specialh2" id="textBox"></h2>
+        <br>
+        <a class="btn btn-primary" href="#" onClick="addDrumsToCurrentSong()">Add 10% danceability <span style='font-size:40px;'>&#128522;</span></a>
+        <br>
+        <br>
+        <h2 class="specialh2"> These are the keys you have previously selected: </h2>
+        <br>
+        <h2 class="specialh2" id="demo"></h2>
+        <br>
+        <h2 class="specialh2"> The "#-#-#-#" structure for chord progression describes the specific chords from the key of the song used. Each song has a key
+          with 7 unique chords and are linked together sequentially to form a progression. For example, the C major chord has the following chords: 
+          C(1st), D minor(2nd), E minor(3rd), F(4th), G(5th), A minor(6th), B diminished(7th). Usually the 1st, 4th and 5th chords are the most frequently
+          used in 4 chord progressions. 
+        </h2>
+        <br>
+        <h2 class="specialh2">
+          The cadence usually refers to how a song ends, but is useful for describing how short four chord progression end on their loop. They refer to the last two
+          chords in a progression. For example, in a 1-4-5-1 progression, the 5th and 1st chords are last and therefore determine how to loop sounds each end. In this 
+          case a 5-1 ending is a perfect cadence - a very commmon, satisyfing ending.  
+        </h2>
+     </div>
+
+
     </div>
 
   </header>
