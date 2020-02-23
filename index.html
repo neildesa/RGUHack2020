@@ -89,49 +89,69 @@
       if(secondChord==='F3')
       {
         playPumpedUpKicksBase();
+        song="pumpedup";
       }
       else if (secondChord === 'A3')
       {
         playShrekBass();
+        song="shrek";
       }
       else if (secondChord === 'G2') 
       {
         playMegaloBase();
+        song="megalo";
       }
-
+      console.log(song);
       $("#div3").fadeOut(0);
       $("#div4").fadeIn(3000);
      document.getElementById("demo2").innerHTML = arrayOfChords;
+     displayKeys();
     }
                                            
     var toBeRemoved=0;
     var keys = [];
-
+    
+    var localArray=[];
+    var song;
+    var keysPumpedUp=["D4","F4","A4","G4"];
+    var keysShrek=["D4","G4","A4","B4"];
+    var keysMegalo=["D4","D#4","E4","A4"];
     // if (keys)
     function keyPressed(key){
-
-     if(keys.length<3)
-     {
+      var targetArray=[];
+      if (arrayOfChords[1] === "F3") {
+        song="pumpedup";
+        targetArray=keysPumpedUp;
+      }
+      else if (arrayOfChords[1] === "A3") {
+        song="shrek";
+        targetArray=keysShrek;
+      }
+      else if (arrayOfChords[1] === "G2") {
+        song="megalo";
+        targetArray=keysMegalo;
+      }
+      console.log(targetArray,localArray);
        if(toBeRemoved===1)
        {
-        secondToLast = keys.length;
-        keys.splice(secondToLast, 1);
+        secondToLast = localArray.length;
+        localArray.splice(secondToLast, 1);
         toBeRemoved=0;
        }
        else if(key==="C#4" || key==="D#4" || key==="F#4" || key==="G#4" || key==="A#4")
        {
-          keys.push(key);
+          localArray.push(key);
           toBeRemoved=1;
         }
         else{
-          keys.push(key);
+          localArray.push(key);
         }
-     }
+     //localArray.push(key);
+     var allKeys = localArray.toString();
+     document.getElementById("demo").innerHTML = allKeys;
      
-     var allKeys = keys.toString();
-     document.getElementById("demo").innerHTML = keys;
 
-     if(keys.length===3)
+     if(localArray.includes(targetArray[0]) && localArray.includes(targetArray[1]) && localArray.includes(targetArray[2]) && localArray.includes(targetArray[3]))
      {
       $("#div4").fadeOut(0);
       //call your function here
@@ -462,68 +482,68 @@
             <!--Piano Code-->
       <div id="div4" style="display: none;">
         <h2 class="specialh2"> Use the following piano to hear the different available keys:</h2>
-        <ul id="piano">
-          <li data-note="C4" class="key">
-            <div data-note="C#4" class="black-key">C#4</div>
-            C4
-          </li>
-          <li data-note="D4" class="key">
-            <div data-note="D#4" class="black-key">D#4</div>
-            D4
-          </li>
-          <li data-note="E4" class="key">
-            E4
-          </li>
-          <li data-note="F4" class="key">
-            <div data-note="F#4" class="black-key">F#4</div>
-            F4
-          </li>
-          <li data-note="G4" class="key">
-            <div data-note="G#4" class="black-key">G#4</div>
-            G4
-          </li>
-          <li data-note="A4" class="key">
-            <div data-note="A#4" class="black-key">A#4</div>
-            A4
-          </li>
-          <li data-note="B4" class="key">
-            B4
-          </li>
-        </ul>
+        
         <br>
         <h2 class="specialh2"> Use the following piano to choose three keys, once you have chosen them you cannot go:</h2>
         <ul id="piano">
-          <li onClick="keyPressed('C4')" data-note="C4" class="key">
-            <div onClick="keyPressed('C#4')" data-note="C#4" class="black-key">C#4</div>
+          <li id="C4" onClick="keyPressed('C4')" data-note="C4" class="key">
+            <div id="C#4" onClick="keyPressed('C#4')" data-note="C#4" class="black-key">C#4</div>
             C4
           </li>
-          <li onClick="keyPressed('D4')" data-note="D4" class="key">
-            <div onClick="keyPressed('D#4')" data-note="D#4" class="black-key">D#4</div>
+          <li id="D4" onClick="keyPressed('D4')" data-note="D4" class="key">
+            <div id="D#4" onClick="keyPressed('D#4')" data-note="D#4" class="black-key">D#4</div>
             D4
           </li>
-          <li onClick="keyPressed('E4')" data-note="E4" class="key">
+          <li id="E4" onClick="keyPressed('E4')" data-note="E4" class="key">
             E4
           </li>
-          <li onClick="keyPressed('F4')" data-note="F4" class="key">
-            <div onClick="keyPressed('F#4')" data-note="F#4" class="black-key">F#4</div>
+          <li id="F4" onClick="keyPressed('F4')" data-note="F4" class="key">
+            <div id="F#4" onClick="keyPressed('F#4')" data-note="F#4" class="black-key">F#4</div>
             F4
           </li>
-          <li onClick="keyPressed('G4')" data-note="G4" class="key">
-            <div onClick="keyPressed('G#4')" data-note="G#4" class="black-key">G#4</div>
+          <li id="G4" onClick="keyPressed('G4')" data-note="G4" class="key">
+            <div id="G#4" onClick="keyPressed('G#4')" data-note="G#4" class="black-key">G#4</div>
             G4
           </li>
-          <li onClick="keyPressed('A4')" data-note="A4" class="key">
-            <div onClick="keyPressed('A#4')" data-note="A#4" class="black-key">A#4</div>
+          <li id="A4" onClick="keyPressed('A4')" data-note="A4" class="key">
+            <div id="A#4" onClick="keyPressed('A#4')" data-note="A#4" class="black-key">A#4</div>
             A4
           </li>
-          <li onClick="keyPressed('B4')" data-note="B4" class="key">
+          <li id="B4" onClick="keyPressed('B4')" data-note="B4" class="key">
             B4
           </li>
         </ul>
         <script src="js/piano.js"></script>
+        <script>
+
+        function displayKeys(){
+          if(song==="pumpedup")
+          {
+            document.getElementById(keysPumpedUp[0]).style.background = "blue";
+            document.getElementById(keysPumpedUp[1]).style.background = "blue";
+            document.getElementById(keysPumpedUp[2]).style.background = "blue";
+            document.getElementById(keysPumpedUp[3]).style.background = "blue";
+          }
+          else if(song==="megalo")
+          {
+            document.getElementById(keysMegalo[0]).style.background = "blue";
+            document.getElementById(keysMegalo[1]).style.background = "blue";
+            document.getElementById(keysMegalo[2]).style.background = "blue";
+            document.getElementById(keysMegalo[3]).style.background = "blue";
+          }
+          else if(song==="shrek")
+          {
+            document.getElementById(keysShrek[0]).style.background = "blue";
+            document.getElementById(keysShrek[1]).style.background = "blue";
+            document.getElementById(keysShrek[2]).style.background = "blue";
+            document.getElementById(keysShrek[3]).style.background = "blue";
+          }
+        }  
+        </script>
       </div>
         <!--End of Piano Code-->
-
+       
+        
         <p id="demo2"></p>
         <p id="demo"></p>
        
