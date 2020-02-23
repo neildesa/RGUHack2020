@@ -53,7 +53,7 @@
     };
 
     function spawnLevelB(a, firstChord){
-      arrayOfChords.push('firstChord');
+      arrayOfChords.push(firstChord);
       $("#ins1").fadeOut(0);
       $("#levelS").fadeIn(2000);
       if(a===1)
@@ -67,8 +67,10 @@
         $("#levelB2").fadeIn(3000);
       }
     }
+    var thirdChord;
+    var fourthChord;
     function playSongBasedOnChords(b, secondChord){
-      arrayOfChords.push('secondChord');
+      arrayOfChords.push(secondChord);
       
       var y = 0;
       while(y<5)
@@ -81,6 +83,11 @@
           $("#buttonB"+y).fadeOut(0);
           y++;
         }
+      }
+      if(secondChord==='A4')
+      {
+        arrayOfChords.push("E4");
+        arrayOfChords.push("F4");
       }
       $("#div3").fadeOut(0);
       $("#div4").fadeIn(3000);
@@ -113,23 +120,19 @@
      if(keys.length===3)
      {
       $("#div4").fadeOut(0);
+      //call your function here
+      playFourChords();
      }
     }
 
-
-    // One-liner to resume playback when user interacted with the page.
-    document.getElementById('button').addEventListener('click', async () => {
-      await Tone.start()
-      console.log('audio is ready')
-    })
-function testSounds()
+function playFourChords()
       {
       var array = ["C3", "F4", "G4", "C4"]
       var synth = new Tone.Synth();
       synth.toMaster();
       var seq = new Tone.Sequence(function(time, note){
         synth.triggerAttackRelease(note, "1n", time);
-      }, array, "8n");
+      }, arrayOfChords, "4n");
       //set the note to loop every half measure
       // seq.set({
       //   "loop" : true,
@@ -189,7 +192,7 @@ function testSounds()
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about" onClick="testSounds()" >About</a>
+            <a class="nav-link js-scroll-trigger" href="#about" onClick="playFourChords()" >About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
@@ -217,7 +220,7 @@ function testSounds()
           <div class="buttonApp">
             <div id="levelA" style="display:none;">
               <div id="ins1"> <h1 class="mx-auto my-0 ">Select your first chord:</h1> </div>
-              <button id="buttonA1" class="bubble" onClick="spawnLevelB(1,'chord1')"> A1 </button>
+              <button id="buttonA1" class="bubble" onClick="spawnLevelB(1,'C3')"> C3 </button>
               <button id="buttonA2" class="bubble" onClick="spawnLevelB(2,'chord1')"> A2 </button>
             </div>
             
@@ -225,7 +228,7 @@ function testSounds()
             </div>
               <div id="levelB1" style="display:none;">
                 
-                <button id="buttonB1" class="bubble" onClick="playSongBasedOnChords(1,'chord2')"> B1 </button>
+                <button id="buttonB1" class="bubble" onClick="playSongBasedOnChords(1,'A4')"> A4 </button>
                 <button id="buttonB2" class="bubble" onClick="playSongBasedOnChords(2,'chord2')"> B2 </button>
               </div>
               <div id="levelB2" style="display:none;">
