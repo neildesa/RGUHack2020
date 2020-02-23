@@ -114,6 +114,34 @@
       $("#div4").fadeOut(0);
      }
     }
+
+
+    // One-liner to resume playback when user interacted with the page.
+    document.getElementById('button').addEventListener('click', async () => {
+      await Tone.start()
+      console.log('audio is ready')
+    })
+function testSounds()
+      {
+      var array = ["C3", "F4", "G4", "C4"]
+      var synth = new Tone.Synth();
+      synth.toMaster();
+      var seq = new Tone.Sequence(function(time, note){
+        synth.triggerAttackRelease(note, "1n", time);
+      }, array, "8n");
+      //set the note to loop every half measure
+      // seq.set({
+      //   "loop" : true,
+      //   "loopEnd" : "2n"
+      // });
+      seq.start(0);
+      Tone.Transport.start()
+      // var pattern = new Tone.Pattern(function(time, note){
+      //   synth.triggerAttackRelease(note, "1n", time);
+      // }, array);
+      // pattern.start(0);
+      // Tone.Transport.start()
+    }
   </script>
   <style>
     .bubble{
@@ -156,10 +184,11 @@
         Menu
         <i class="fas fa-bars"></i>
       </button>
+      <button id='button' type='button'>Reset Audio</button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            <a class="nav-link js-scroll-trigger" href="#about" onClick="testSounds()" >About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
@@ -288,7 +317,13 @@
 
   </header>
 
-
+  <script>
+    // One-liner to resume playback when user interacted with the page.
+    document.getElementById('button').addEventListener('click', async () => {
+      await Tone.start()
+      console.log('audio is ready')
+    })
+  </script>
 
 
   <!-- Footer -->
