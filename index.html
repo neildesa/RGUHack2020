@@ -69,6 +69,7 @@
     }
     var thirdChord;
     var fourthChord;
+
     function playSongBasedOnChords(b, secondChord){
       arrayOfChords.push(secondChord);
       
@@ -84,11 +85,21 @@
           y++;
         }
       }
-      if(secondChord==='A4')
+
+      
+      if(secondChord==='F3')
       {
-        arrayOfChords.push("E4");
-        arrayOfChords.push("F4");
+        playPumpedUpKicksBase();
       }
+      else if (secondChord === 'A3')
+      {
+        playShrekBass();
+      }
+      else if (secondChord === 'G2') 
+      {
+        playMegaloBase();
+      }
+
       $("#div3").fadeOut(0);
       $("#div4").fadeIn(3000);
      document.getElementById("demo2").innerHTML = arrayOfChords;
@@ -96,6 +107,8 @@
                                            
     var toBeRemoved=0;
     var keys = [];
+
+    // if (keys)
     function keyPressed(key){
 
      if(keys.length<3)
@@ -115,37 +128,237 @@
           keys.push(key);
         }
      }
+     
      var allKeys = keys.toString();
      document.getElementById("demo").innerHTML = keys;
+
      if(keys.length===3)
      {
       $("#div4").fadeOut(0);
       //call your function here
-      playFourChords();
+      if (arrayOfChords[1] === "F3") {
+        playPumpedUpKicksMelody();
+      }
+      else if (arrayOfChords[1] === "A3") {
+        playShrekMelody();
+      }
+      else if (arrayOfChords[1] === "G2") {
+        playMegaloMelody();
+      }
+      
      }
     }
 
-function playFourChords()
-      {
-      var array = ["C3", "F4", "G4", "C4"]
-      var synth = new Tone.Synth();
+    function playShrekMelody()
+    {
+      var shrekMelody = [["D5", "B4"], ["B4", null],  ["A4", "G4"], ["G4", "C5"], [null, "B4"], ["B4", "A4"], ["A4", "G4"], [null, "G4"]]
+
+      var synth2 = new Tone.Synth();
+      synth2.toMaster();
+
+      var playMelody = new Tone.Sequence(function(time, note){
+        synth2.triggerAttackRelease(note, "1n", time);
+      }, shrekMelody, "3n");
+
+      playMelody.start(0);
+      Tone.Transport.start();
+    }
+
+    function playShrekBass()
+    {
+      // play on 3n
+      var shrekBass = [["D3", null], [null, "D3"],  ["A3", null], [null, "A3"], ["E3", null], [null, "E3"], ["G3", null], ["G3", "F#3"]]
+
+
+      var synth1 = new Tone.Synth({
+        "oscilator" : {
+          "type" : "amtriangle",
+          "harmonicity" : 0.5,
+          "modulationType" : "sine"
+        },
+        "envelope" : {
+          "attackCurve" : "exponential",
+          "attack" : 0.05, 
+          "decay" : 0.2,
+          "sustain" : 0.2,
+          "release" : 1.5,
+        },
+        "portamento" : 0.05
+      });
+      synth1.toMaster();
+
+      var playBass = new Tone.Sequence(function(time, note){
+        synth1.triggerAttackRelease(note, "1n", time);
+      }, shrekBass, "3n");
+
+      playBass.start(0);
+
+      Tone.Transport.start()
+
+    }
+
+    function playShrekDrums()
+    {
+      var ShrekDrums = [["D2", "D2"], [null, null],  ["A2", "A2"], [null, null], ["E2", "E2"], [null, null], ["G2", "G2"], [null, null]]
+
+      var synth = new Tone.MembraneSynth();
       synth.toMaster();
+
       var seq = new Tone.Sequence(function(time, note){
         synth.triggerAttackRelease(note, "1n", time);
-      }, arrayOfChords, "4n");
-      //set the note to loop every half measure
-      // seq.set({
-      //   "loop" : true,
-      //   "loopEnd" : "2n"
-      // });
+      }, ShrekDrums, "3n");
+
       seq.start(0);
       Tone.Transport.start()
-      // var pattern = new Tone.Pattern(function(time, note){
-      //   synth.triggerAttackRelease(note, "1n", time);
-      // }, array);
-      // pattern.start(0);
-      // Tone.Transport.start()
     }
+
+    function playPumpedUpKicksMelody() 
+    {
+      var pumpedUpKicksMelody = [[null, "G4"], ["G4", "F4"], ["F4", null], ["D4", "C4"],  ["F4", null], ["F4", null], ["F4", "C4"], ["D4", "C4"],
+      ["F4", null], ["F4", null], ["F4", null], [null, "G4"], [null, "G4"], ["G4", "A4"], ["G4", "F4"], [null, "A4"]]   
+
+      var synth2 = new Tone.Synth();
+      synth2.toMaster();
+
+      var playPumpedUpKicksMelody = new Tone.Sequence(function(time, note){
+        synth2.triggerAttackRelease(note, "1n", time);
+      }, pumpedUpKicksMelody, "4n");   
+
+      playPumpedUpKicksMelody.start(0);
+      Tone.Transport.start();
+    }
+
+    function playPumpedUpKicksBase()
+    {
+      // play on 4n
+      var pumpedUpKicksBass = [["D3", null], [null, "D3"], [null, null], ["D3", null],  ["F3", null], [null, "F3"], [null, null], ["F3", null],
+       ["C3", null], [null, "C3"], [null, null], ["C3", null], ["G3", null], [null, "G3"], [null, null], ["G3", null]]
+
+      var synth1 = new Tone.Synth({
+        "oscilator" : {
+          "type" : "amtriangle",
+          "harmonicity" : 0.5,
+          "modulationType" : "sine"
+        },
+        "envelope" : {
+          "attackCurve" : "exponential",
+          "attack" : 0.05, 
+          "decay" : 0.2,
+          "sustain" : 0.2,
+          "release" : 1.5,
+        },
+        "portamento" : 0.05
+      });
+
+      synth1.toMaster();
+
+      var playPumpedUpKicksBass = new Tone.Sequence(function(time, note){
+        synth1.triggerAttackRelease(note, "1n", time);
+      }, pumpedUpKicksBass, "4n");
+
+
+
+      playPumpedUpKicksBass.start(0);
+      Tone.Transport.start()
+    }
+
+    function playPumpedUpKicksDrums()
+    {
+      var PumpedUpKicksDrums = ["D2", "F2", "C2", "G2"]
+
+      var synth = new Tone.MembraneSynth();
+      synth.toMaster();
+
+      var seq = new Tone.Sequence(function(time, note){
+        synth.triggerAttackRelease(note, "1n", time);
+      }, PumpedUpKicksDrums, "4n");
+
+      seq.start(0);
+      Tone.Transport.start()
+    }
+
+    function playMegaloBase()
+    {
+      var MegaloBase = [["A2", "A2"], ["A2", "A2", null, "A2"], [null, "A2", null, "A2"], ["A2", "A2", "A2", null], ["G2", "G2"], ["G2", "G2", null, "G2"], [null, "G2", null, "G2"], ["G2", "G2", "G2", null],
+      ["F#2", "F#2"], ["F#2", "F#2", null, "F#2"], [null, "F#2", null, "F#2"], ["F#2", "F#2", "F#2", null], ["F2", "F2"], ["F2", "F2", null, "G2"], [null, "G2", null, "G2"], ["G2", "G2", "G2", null]]
+
+      var synth1 = new Tone.Synth({
+        "oscilator" : {
+          "type" : "amtriangle",
+          "harmonicity" : 0.5,
+          "modulationType" : "sine"
+        },
+        "envelope" : {
+          "attackCurve" : "exponential",
+          "attack" : 0.05, 
+          "decay" : 0.2,
+          "sustain" : 0.2,
+          "release" : 1.5,
+        },
+        "portamento" : 0.05
+      });
+
+      synth1.toMaster();
+
+      var playMegaloBase = new Tone.Sequence(function(time, note){
+        synth1.triggerAttackRelease(note, "1n", time);
+      }, MegaloBase, "4n");
+
+      playMegaloBase.start(0);
+      Tone.Transport.start()
+    }
+
+    function playMegaloMelody()
+    {
+      var megaloMelody = [["A3","A3", "A4", null], ["E4", null, null, "D#4"], [null, "D4", null, "C4"], [null, "A3", "C4", "D4"],  
+      ["G3","G3", "A4", null], ["E4", null, null, "D#4"], [null, "D4", null, "C4"], [null, "A3", "C4", "D4"],
+      ["F#3","F#3", "A4", null], ["E4", null, null, "D#4"], [null, "D4", null, "C4"], [null, "A3", "C4", "D4"], 
+      ["F3","F3", "A4", null], ["E4", null, null, "D#4"], [null, "D4", null, "C4"], [null, "A3", "C4", "D4"]]   
+
+      var synth2 = new Tone.Synth();
+      synth2.toMaster();
+
+      var playMegaloMelody= new Tone.Sequence(function(time, note){
+        synth2.triggerAttackRelease(note, "1n", time);
+      }, megaloMelody, "4n");   
+
+      playMegaloMelody.start(0);
+      Tone.Transport.start();
+    }
+
+    function playMegaloDrums()
+    {
+      var megaloDrums =  [["A1", "A1", "A1", "A1"], ["A1", "A1", "A1", "A1"], [null, "A1", null, "A1"], ["A1", "A1", "A1", "A1"], 
+      ["G1", "G1", "G1", "G1"], ["G1", "G1", "G1", "G1"], [null, "G1", null, "G1"], ["G1", "G1", "G1", "G1"],
+      ["F#1", "F#1", "F#1", "F#1"], ["F#1", "F#1", "F#1", "F#1"], [null, "F#1", null, "F#1"], ["F#1", "F#1", "F#1", "F#1"], 
+      ["F1", "F1", "F1", "F1"], ["F1", "F1", "F1", "G1"], [null, "G1", null, "G1"], ["G1", "G1", "G1", "G1"]] 
+
+      var synth = new Tone.MembraneSynth();
+      synth.toMaster();
+
+      synth.volume.value = -10;
+
+      var seq = new Tone.Sequence(function(time, note){
+        synth.triggerAttackRelease(note, "1n", time);
+      }, megaloDrums, "4n");
+
+      seq.start(0);
+      Tone.Transport.start()
+    }
+
+    function addDrumsToCurrentSong() 
+    {
+      if (arrayOfChords[1] === "F3") {
+        playPumpedUpKicksDrums();
+      }
+      else if (arrayOfChords[1] === "A3") {
+        playShrekDrums();
+      }
+      else if (arrayOfChords[1] === "G2") {
+        playMegaloDrums();
+      }
+    }
+
   </script>
   <style>
     .bubble{
@@ -193,7 +406,7 @@ function playFourChords()
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about" onClick="playFourChords()" >About</a>
+            <a class="nav-link js-scroll-trigger" href="#about" onClick="addDrumsToCurrentSong()" >About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
@@ -222,19 +435,19 @@ function playFourChords()
             <div id="levelA" style="display:none;">
               <div id="ins1"> <h1 class="mx-auto my-0 ">Select your first chord:</h1> </div>
               <br>
-              <button id="buttonA1" class="bubble" onClick="spawnLevelB(1,'C3')"> C3 </button>
-              <button id="buttonA2" class="bubble" onClick="spawnLevelB(2,'chord1')"> A2 </button>
+              <button id="buttonA1" class="bubble" onClick="spawnLevelB(1,'D3')"> D3 </button>
+              <button id="buttonA2" class="bubble" onClick="spawnLevelB(2,'A2')"> A2 </button>
             </div>
             
             <div id="levelS" style="display:none;"> <h1 class="mx-auto my-0 ">Select your second chord:</h1>
             </div>
               <div id="levelB1" style="display:none;">
                 
-                <button id="buttonB1" class="bubble" onClick="playSongBasedOnChords(1,'A4')"> A4 </button>
-                <button id="buttonB2" class="bubble" onClick="playSongBasedOnChords(2,'chord2')"> B2 </button>
+                <button id="buttonB1" class="bubble" onClick="playSongBasedOnChords(1,'F3')"> F3 </button>
+                <button id="buttonB2" class="bubble" onClick="playSongBasedOnChords(2,'A3')"> A3 </button>
               </div>
               <div id="levelB2" style="display:none;">
-                <button id="buttonB3" class="bubble" onClick="playSongBasedOnChords(3,'chord2')"> B3 </button>
+                <button id="buttonB3" class="bubble" onClick="playSongBasedOnChords(3,'G2')"> G2 </button>
                 <button id="buttonB4" class="bubble" onClick="playSongBasedOnChords(4,'chord2')"> B4 </button>
               </div>
   
