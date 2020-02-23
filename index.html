@@ -93,11 +93,11 @@
       $("#div4").fadeIn(3000);
      document.getElementById("demo2").innerHTML = arrayOfChords;
     }
+                                           
     var toBeRemoved=0;
     var keys = [];
     function keyPressed(key){
-      
-   
+
      if(keys.length<3)
      {
        if(toBeRemoved===1)
@@ -169,7 +169,8 @@ function playFourChords()
     }
 
     .specialh2{
-      line-height: 2.5rem;
+      line-height: 2rem;
+      font-size: 1.6rem;;
       background: -webkit-linear-gradient(rgba(255, 255, 255), rgba(255, 255, 255, 0));
       -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
       -webkit-background-clip: text;
@@ -220,6 +221,7 @@ function playFourChords()
           <div class="buttonApp">
             <div id="levelA" style="display:none;">
               <div id="ins1"> <h1 class="mx-auto my-0 ">Select your first chord:</h1> </div>
+              <br>
               <button id="buttonA1" class="bubble" onClick="spawnLevelB(1,'C3')"> C3 </button>
               <button id="buttonA2" class="bubble" onClick="spawnLevelB(2,'chord1')"> A2 </button>
             </div>
